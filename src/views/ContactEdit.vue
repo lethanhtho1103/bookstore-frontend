@@ -1,7 +1,7 @@
 <template>
   <div v-if="contact" class="page">
     <h4>Hiệu chỉnh Liên hệ</h4>
-    <ContactForm
+    <BookForm
       :contact="contact"
       @submit:contact="updateContact"
       @delete:contact="deleteContact"
@@ -11,11 +11,11 @@
 </template>
 
 <script>
-import ContactForm from "@/components/ContactForm.vue";
+import BookForm from "@/components/BookForm.vue";
 import ContactService from "@/services/contact.service";
 export default {
   components: {
-    ContactForm,
+    BookForm,
   },
   props: {
     id: { type: String, required: true },
