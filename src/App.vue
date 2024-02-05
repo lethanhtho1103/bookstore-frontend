@@ -28,7 +28,11 @@ export default {
           </div>
         </div>
       </div>
-      <div class="content"></div>
+      <div class="content">
+        <div class="container">
+          <router-view />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -99,12 +103,7 @@ export default {
 }
 
 .user-avatar {
-  /* height: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-left: 14px;
-  cursor: pointer; */
+  margin-top: 2px;
   color: #fff;
 }
 
@@ -112,6 +111,6 @@ export default {
   width: 100%;
   margin-top: 80px;
   padding: 24px 12px 0;
-  height: 2000px;
+  height: 100vh;
 }
 </style>

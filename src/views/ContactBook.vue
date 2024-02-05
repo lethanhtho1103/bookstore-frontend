@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="page row mx-auto">
     <div class="col-md-10"><InputSearch v-model="searchText" /></div>
     <div class="mt-3 col-md-6">
@@ -133,4 +133,101 @@ export default {
   text-align: left;
   max-width: 750px;
 }
-</style>
+</style> -->
+<template>
+  <div>
+    <h4 class="mb-3">
+      Danh sách các quyển sách có trong shop
+      <i class="fa-solid fa-book"></i>
+    </h4>
+
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column
+        prop="_id"
+        label="Mã sách"
+        sortable
+        :sort-method="sortMethod('_id')"
+      ></el-table-column>
+      <el-table-column
+        prop="tenSach"
+        label="Tên sách"
+        sortable
+        :sort-method="sortMethod('tenSach')"
+      ></el-table-column>
+      <el-table-column
+        prop="soQuyen"
+        label="Số quyển"
+        sortable
+        :sort-method="sortMethod('soQuyen')"
+      ></el-table-column>
+      <el-table-column
+        prop="donGia"
+        label="Đơn giá"
+        sortable
+        :sort-method="sortMethod('donGia')"
+      ></el-table-column>
+      <el-table-column
+        prop="namXuatBan"
+        label="Năm xuất bản"
+        sortable
+        :sort-method="sortMethod('namXuatBan')"
+      ></el-table-column>
+      <el-table-column
+        prop="maNxb"
+        label="Mã nhà xuất bản"
+        sortable
+        :sort-method="sortMethod('maNxb')"
+      ></el-table-column>
+      <el-table-column
+        prop="tacGia"
+        label="Tác giả"
+        sortable
+        :sort-method="sortMethod('tacGia')"
+      ></el-table-column>
+    </el-table>
+  </div>
+</template>
+
+<script>
+import ContactService from "@/services/contact.service";
+
+export default {
+  components: {},
+
+  data() {
+    return {
+      tableData: [],
+    };
+  },
+
+  mounted() {
+    this.retrieveContacts();
+  },
+
+  methods: {
+    async retrieveContacts() {
+      try {
+        this.tableData = await ContactService.getAll();
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    sortMethod(prop) {
+      return (a, b) => {
+        const aValue = a[prop];
+        const bValue = b[prop];
+        return aValue === bValue ? 0 : aValue > bValue ? 1 : -1;
+      };
+    },
+    // sort(prop, order) {
+    //   // Thực hiện sự kiện sắp xếp
+    //   const sortOrders = order === "ascending" ? 1 : -1;
+    //   this.tableData.sort((a, b) => {
+    //     const aValue = a[prop];
+    //     const bValue = b[prop];
+    //     return sortOrders * (aValue === bValue ? 0 : aValue > bValue ? 1 : -1);
+    //   });
+    // },
+  },
+};
+</script>
