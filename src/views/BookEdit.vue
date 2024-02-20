@@ -1,12 +1,12 @@
 <template>
-  <div v-if="contact" class="page">
-    <h4>Hiệu chỉnh Liên hệ</h4>
+  <div v-if="book" class="page">
+    <h4>Hiệu chỉnh sách</h4>
+    <p class="success">{{ message }}</p>
     <BookForm
-      :contact="contact"
-      @submit:contact="updateContact"
-      @delete:contact="deleteContact"
+      :book="book"
+      @submit:book="updateBook"
+      @delete:book="deleteBook"
     />
-    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -23,14 +23,14 @@ export default {
 
   data() {
     return {
-      contact: null,
+      book: null,
       message: "",
     };
   },
   methods: {
-    async getContact(id) {
+    async getBook(id) {
       try {
-        this.contact = await ContactService.get(id);
+        this.book = await ContactService.get(id);
       } catch (error) {
         console.log(error);
         // Chuyển sang trang NotFound đồng thời giữ cho URL không đổi
@@ -44,18 +44,18 @@ export default {
         });
       }
     },
-    async updateContact(data) {
+    async updateBook(data) {
       try {
-        await ContactService.update(this.contact._id, data);
-        this.message = "Liên hệ được cập nhật thành công.";
+        await ContactService.update(this.book._id, data);
+        this.message = "Sách được cập nhật thành công.";
       } catch (error) {
         console.log(error);
       }
     },
-    async deleteContact() {
-      if (confirm("Bạn muốn xóa Liên hệ này?")) {
+    async deleteBook() {
+      if (confirm("Bạn muốn xóa sách này?")) {
         try {
-          await ContactService.delete(this.contact._id);
+          await ContactService.delete(this.book._id);
           this.$router.push({ name: "contactbook" });
         } catch (error) {
           console.log(error);
@@ -65,8 +65,15 @@ export default {
   },
 
   created() {
-    this.getContact(this.id);
+    this.getBook(this.id);
     this.message = "";
   },
 };
 </script>
+
+<style scoped>
+.success {
+  color: #28a745;
+  font-size: 17px;
+}
+</style>

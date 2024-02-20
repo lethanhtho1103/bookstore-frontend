@@ -1,8 +1,8 @@
 <template>
   <div v-if="book" class="page">
-    <h4>Thêm liên hệ</h4>
+    <h4>Thêm sách</h4>
+    <p class="success">{{ message }}</p>
     <BookForm :book="book" @submit:book="addBook" />
-    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -24,8 +24,7 @@ export default {
     async addBook(data) {
       try {
         await contactService.create(data);
-        this.message = "Thêm liên hệ mới thành công.";
-        console.log(this.message);
+        this.message = "Thêm sách mới thành công.";
       } catch (error) {
         console.log(error);
       }
@@ -35,3 +34,10 @@ export default {
   created() {},
 };
 </script>
+
+<style scoped>
+.success {
+  color: #28a745;
+  font-size: 17px;
+}
+</style>

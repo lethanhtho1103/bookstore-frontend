@@ -6,7 +6,7 @@
         name="maSach"
         type="text"
         class="form-control"
-        v-model="bookLocal.maSach"
+        v-model="bookLocal._id"
       />
       <ErrorMessage name="maSach" class="error-feedback" />
     </div>
@@ -81,7 +81,7 @@
         v-if="bookLocal._id"
         type="button"
         class="ml-2 btn btn-danger"
-        @click="deleteContact"
+        @click="deleteBook"
       >
         Xóa
       </button>
@@ -104,7 +104,7 @@ export default {
   },
   data() {
     const bookFormSchema = yup.object().shape({
-      maSach: yup
+      _id: yup
         .string()
         .required("Mã sách không được rỗng.")
         .min(4, "Mã sách phải ít nhất 4 ký tự.")
@@ -115,10 +115,11 @@ export default {
       donGia: yup.string().required("Đơn giá chưa có."),
       soQuyen: yup.string().required("Số quyển chưa có."),
       namXuatBan: yup.string().required("Năm xuất bản chưa có."),
+      maNxb: yup.string().required("Mã nhà xuất bản chưa có."),
       tacGia: yup
         .string()
-        .required("Nguồn gốc tác giả không được rỗng.")
-        .max(50, "Nguồn gốc tác giả có nhiều nhất 50 ký tự."),
+        .required("Tác giả không được rỗng.")
+        .max(50, "Tác giả có nhiều nhất 50 ký tự."),
     });
     return {
       // Chúng ta sẽ không muốn hiệu chỉnh props, nên tạo biến cục bộ
